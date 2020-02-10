@@ -1,0 +1,44 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Inconnu(e) </title></head><body>
+<h1 id="gloth">Gloth</h1>
+<p>Build the images and run the containers:</p>
+<p><code>sh
+docker-compose up -d --build</code></p>
+<p>Test it out at <a href="http://localhost:5000">http://localhost:5000</a>. The "web" folder is mounted into the container and your code changes apply automatically.</p>
+<p>To interact with the database shell:
+<code>sh
+docker exec -ti flask-on-docker_db_1 psql -U gloth postgres</code></p>
+<p>or simply use a database tool to have a graphical interface to edit the db (dbeaver for example)
+<code>python
+POSTGRES = {
+    'user': 'gloth',
+    'pw': 'password',
+    'db': 'postgres',
+    'host': 'localhost',
+    'port': '5432',
+}</code></p>
+<p>The only files you need to edit to modify the website are inside the <code>project</code> folder</p>
+<h2 id="project-organization">Project Organization</h2>
+<pre><code>├── docker-compose.yml            &lt;-- generates the containers
+├── gloth
+│   ├── Dockerfile                &lt;-- generates the containers
+│   ├── entrypoint.sh             &lt;-- generates the containers
+│   ├── project
+│   │   ├── __init__.py           &lt;-- makes src a Python module, init the website
+│   │   ├── config.py             &lt;-- configuration file for the website
+│   │   ├── forms.py              &lt;-- forms used by the site (text inputs, buttons etc.)
+│   │   ├── models.py             &lt;-- classes that describe the database tables for the ORM
+│   │   ├── static                &lt;-- css/jquery/ font files
+│   │   ├── templates             &lt;-- html files used to display the pages
+│   │   │   ├── base.html         &lt;-- top blue header
+│   │   │   ├── index.html        &lt;-- index page
+│   │   │   └── medic.html        &lt;-- page displayed after submit button
+│   │   ├── utils.py              &lt;-- utility functions (queries etc.)
+│   │   └── views.py              &lt;-- contains the views of the site (index, medic etc.)
+│   ├── requirements.txt          &lt;-- python modules needed
+│   └── run.py                    &lt;-- file that launches the site
+├── gloth.sql                     &lt;-- database dump
+└── README.md
+</code></pre>
+<hr />
+<p>Please keep the same code structure (db models inside <code>models.py</code>, views inside <code>views.py</code>, forms inside <code>forms.py</code> etc.)</p>
+</body></html>
