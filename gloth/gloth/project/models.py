@@ -284,3 +284,23 @@ class Patient(db.Model):
     updated_on = db.Column(
         db.DateTime, server_default=db.func.now(tz=app.config['TIMEZONE']))
     user_id = db.Column(db.Integer, nullable=False)
+
+
+class Thesaurus(db.Model):
+
+    __tablename__ = 'thesaurus'
+    molecule_id_1 = db.Column(db.Integer, nullable=True)
+    molecule_id_2 = db.Column(db.Integer(), nullable=True)
+    remark = db.Column(db.String(), nullable=True)
+    interaction_level = db.Column(db.String(), nullable=True)
+    cis = db.Column(db.Integer(), nullable=True)
+
+
+class TreatmentCis(db.Model):
+
+    __tablename__ = 'treatment_cis'
+    molecule_id_1 = db.Column(db.Integer, nullable=True)
+    molecule_id_2 = db.Column(db.Integer(), nullable=True)
+    remark = db.Column(db.String(), nullable=True)
+    interaction_level = db.Column(db.String(), nullable=True)
+    cis = db.Column(db.Integer(), nullable=True)
