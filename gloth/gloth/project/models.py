@@ -214,7 +214,14 @@ class ClassesFamilies(db.Model):
     class_id = db.Column(db.Integer(), nullable=True)
     family_name = db.Column(db.String(), nullable=True)
     atc = db.Column(db.String(), nullable=True)
+
+    def __init__(self, molecule_id, class_id, family_name, atc):
+    self.molecule_id = molecule_id
+    self.class_id = class_id
+    self.family_name = family_name
+    self.atc = atc
 """
+
 
 class Dermocorticoids(db.Model):
 
@@ -223,6 +230,11 @@ class Dermocorticoids(db.Model):
     cis = db.Column(db.Integer(), nullable=True)
     potency = db.Column(db.String(), nullable=True)
     atc = db.Column(db.String(), nullable=True)
+
+    def __init__(self, cis, potency, atc):
+    self.cis = cis
+    self.potency = potency
+    self.atc = atc
 
 
 class Forms(db.Model):
@@ -239,6 +251,7 @@ class Medication(db.Model):
     name = db.Column(db.String(), nullable=True)
     molecule_id = db.Column(db.Integer(), nullable=True)
 
+
 """
 class MedicationsForms(db.Model):
 
@@ -248,6 +261,7 @@ class MedicationsForms(db.Model):
     form_name = db.Column(db.String(), nullable=True)
     form_id = db.Column(db.Integer(), nullable=True)
 """
+
 
 class Molecules(db.Model):
 
@@ -301,8 +315,27 @@ class Thesaurus(db.Model):
 class TreatmentCis(db.Model):
 
     __tablename__ = 'treatment_cis'
-    molecule_id_1 = db.Column(db.Integer, nullable=True)
-    molecule_id_2 = db.Column(db.Integer(), nullable=True)
-    remark = db.Column(db.String(), nullable=True)
-    interaction_level = db.Column(db.String(), nullable=True)
+    icd_10 = db.Column(db.String(), nullable=True)
+    pathology_name = db.Column(db.String(), nullable=True)
     cis = db.Column(db.Integer(), nullable=True)
+
+
+class TreatmentClass(db.Model):
+
+    __tablename__ = 'treatment_class'
+    icd_10 = db.Column(db.String(), nullable=True)
+    pathology_name = db.Column(db.String(), nullable=True)
+    class_id = db.Column(db.Integer(), nullable=True)
+
+    def __init__(self, cis, pathology_name, class_id):
+        self.icd_10 = icd_10
+        self.pathology_name = pathology_name
+        self.class_id = class_id
+
+
+class TreatmentMolecule(db.Model):
+
+    __tablename__ = 'treatment_molecule'
+    icd_10 = db.Column(db.String(), nullable=True)
+    pathology_name = db.Column(db.String(), nullable=True)
+    molecule_id = db.Column(db.Integer(), nullable=True)
