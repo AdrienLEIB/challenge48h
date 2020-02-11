@@ -138,3 +138,66 @@ class User(db.Model):
 
     def __repr__(self):
         return "<User(forename=%s, name=%s, rpps=%d, email=%s)>" %(self.forename, self.name, self.rpps,self.email)
+
+
+class Dosage(db.Model):
+    """
+
+    """
+    __tablename__ = "dosage"
+    __bind__ = "dosage"
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    cis = db.Column(db.Integer, nullable=False)
+    icd_10 = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, nullable=False)
+    form_id = db.Column(db.Integer, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    cadence = db.Column(db.Integer, nullable=False)
+    duration = db.Column(db.Integer, nullable=False)
+
+    def __init__(self, cis, icd_10, user_id, form_id, quantity, cadence, duration) :
+        self.cis = cis
+        self.icd_10 = icd_10
+        self.user_id = user_id
+        self.form_id = form_id
+        self.quantity = quantity
+        self.cadence = cadence
+        self.duration = duration
+
+
+class Chronic(db.Model):
+    """
+
+    """
+    __tablename__ = "chronic_diseases"
+    __bind__ = "chronic_diseases"
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    icd_10 = db.Column(db.Integer)
+    pathology_name = db.Column(db.String)
+    is_chronic = db.Column(db.Boolean)
+
+    def __init__(self, icd_10, pathology_name, is_chronic):
+        self.icd_10 = icd_10
+        self.pathology_name = pathology_name
+        self.is_chronic = is_chronic
+
+
+class Classes(db.Model):
+    """
+
+    """
+    __tablename__ = "classes"
+    __blind__ = "classes"
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    name = db.Column(db.String, nullable=False)
+
+    def __init__(self, name):
+        self.name = name
+
+
+class FamiliesClasses(db.Model):
+    """
+
+    """
+    molecule_id = db.Column(db.Integer)
+    class_id = db.Column(db.Integer, required=None)
