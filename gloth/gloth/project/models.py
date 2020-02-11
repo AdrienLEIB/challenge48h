@@ -210,6 +210,10 @@ class ClassesFamilies(db.Model):
     class_id = db.Column(db.Integer(), nullable=True)
     family_name = db.Column(db.String(), nullable=True)
     atc = db.Column(db.String(), nullable=True)
+<<<<<<< HEAD
+=======
+
+>>>>>>> e59fc8526b8264e71c82a40692715288458810bb
     def __init__(self, molecule_id, class_id, family_name, atc):
     self.molecule_id = molecule_id
     self.class_id = class_id
@@ -227,9 +231,9 @@ class Dermocorticoids(db.Model):
     atc = db.Column(db.String(), nullable=True)
 
     def __init__(self, cis, potency, atc):
-    self.cis = cis
-    self.potency = potency
-    self.atc = atc
+        self.cis = cis
+        self.potency = potency
+        self.atc = atc
 
 
 class Forms(db.Model):
@@ -333,3 +337,4 @@ class TreatmentMolecule(db.Model):
     icd_10 = db.Column(db.String(), nullable=True)
     pathology_name = db.Column(db.String(), nullable=True)
     molecule_id = db.Column(db.Integer(), nullable=True)
+
