@@ -205,14 +205,16 @@ class Classes(db.Model):
         self.name = name
 
 
+"""
 class ClassesFamilies(db.Model):
 
     __tablename__ = 'classes_families'
+    __bind__ = 'classes_families'
     molecule_id = db.Column(db.Integer(), nullable=True)
     class_id = db.Column(db.Integer(), nullable=True)
     family_name = db.Column(db.String(), nullable=True)
     atc = db.Column(db.String(), nullable=True)
-
+"""
 
 class Dermocorticoids(db.Model):
 
@@ -237,7 +239,7 @@ class Medication(db.Model):
     name = db.Column(db.String(), nullable=True)
     molecule_id = db.Column(db.Integer(), nullable=True)
 
-
+"""
 class MedicationsForms(db.Model):
 
     __tablename__ = 'medications_forms'
@@ -245,7 +247,7 @@ class MedicationsForms(db.Model):
     medication_name = db.Column(db.String(), nullable=True)
     form_name = db.Column(db.String(), nullable=True)
     form_id = db.Column(db.Integer(), nullable=True)
-
+"""
 
 class Molecules(db.Model):
 
