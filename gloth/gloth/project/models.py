@@ -152,7 +152,6 @@ class User(db.Model):
 
 class Dosage(db.Model):
     """
-
     """
     __tablename__ = "dosage"
     __bind__ = "dosage"
@@ -177,7 +176,6 @@ class Dosage(db.Model):
 
 class Chronic(db.Model):
     """
-
     """
     __tablename__ = "chronic_diseases"
     __bind__ = "chronic_diseases"
@@ -194,7 +192,6 @@ class Chronic(db.Model):
 
 class Classes(db.Model):
     """
-
     """
     __tablename__ = "classes"
     __blind__ = "classes"
@@ -207,14 +204,19 @@ class Classes(db.Model):
 
 """
 class ClassesFamilies(db.Model):
-
     __tablename__ = 'classes_families'
     __bind__ = 'classes_families'
     molecule_id = db.Column(db.Integer(), nullable=True)
     class_id = db.Column(db.Integer(), nullable=True)
     family_name = db.Column(db.String(), nullable=True)
     atc = db.Column(db.String(), nullable=True)
+    def __init__(self, molecule_id, class_id, family_name, atc):
+    self.molecule_id = molecule_id
+    self.class_id = class_id
+    self.family_name = family_name
+    self.atc = atc
 """
+
 
 class Dermocorticoids(db.Model):
 
@@ -223,6 +225,11 @@ class Dermocorticoids(db.Model):
     cis = db.Column(db.Integer(), nullable=True)
     potency = db.Column(db.String(), nullable=True)
     atc = db.Column(db.String(), nullable=True)
+
+    def __init__(self, cis, potency, atc):
+    self.cis = cis
+    self.potency = potency
+    self.atc = atc
 
 
 class Forms(db.Model):
@@ -239,15 +246,16 @@ class Medication(db.Model):
     name = db.Column(db.String(), nullable=True)
     molecule_id = db.Column(db.Integer(), nullable=True)
 
+
 """
 class MedicationsForms(db.Model):
-
     __tablename__ = 'medications_forms'
     cis = db.Column(db.Integer(), nullable=True)
     medication_name = db.Column(db.String(), nullable=True)
     form_name = db.Column(db.String(), nullable=True)
     form_id = db.Column(db.Integer(), nullable=True)
 """
+
 
 class Molecules(db.Model):
 
@@ -286,3 +294,42 @@ class Patient(db.Model):
     updated_on = db.Column(
         db.DateTime, server_default=db.func.now(tz=app.config['TIMEZONE']))
     user_id = db.Column(db.Integer, nullable=False)
+
+
+class Thesaurus(db.Model):
+
+    __tablename__ = 'thesaurus'
+    molecule_id_1 = db.Column(db.Integer, nullable=True)
+    molecule_id_2 = db.Column(db.Integer(), nullable=True)
+    remark = db.Column(db.String(), nullable=True)
+    interaction_level = db.Column(db.String(), nullable=True)
+    cis = db.Column(db.Integer(), nullable=True)
+
+
+class TreatmentCis(db.Model):
+
+    __tablename__ = 'treatment_cis'
+    icd_10 = db.Column(db.String(), nullable=True)
+    pathology_name = db.Column(db.String(), nullable=True)
+    cis = db.Column(db.Integer(), nullable=True)
+
+
+class TreatmentClass(db.Model):
+
+    __tablename__ = 'treatment_class'
+    icd_10 = db.Column(db.String(), nullable=True)
+    pathology_name = db.Column(db.String(), nullable=True)
+    class_id = db.Column(db.Integer(), nullable=True)
+
+    def __init__(self, cis, pathology_name, class_id):
+        self.icd_10 = icd_10
+        self.pathology_name = pathology_name
+        self.class_id = class_id
+
+
+class TreatmentMolecule(db.Model):
+
+    __tablename__ = 'treatment_molecule'
+    icd_10 = db.Column(db.String(), nullable=True)
+    pathology_name = db.Column(db.String(), nullable=True)
+    molecule_id = db.Column(db.Integer(), nullable=True)
